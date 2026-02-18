@@ -136,17 +136,29 @@ npm install -D tailwindcss @tailwindcss/postcss postcss autoprefixer
 
 
 git init
+
 git remote add origin https://github.com/labibazad191/university-lms.git
+
 git remote set-url origin https://github.com/labibazad191/university-lms.git
+
 git add .
+
 git commit -m "Initial commit - University LMS Angular Project"
+
 git branch -M main
+
 git push -u origin main
+
 git add .
+
 git commit -m "Update LMS project"
+
 git push origin main
+
 git pull origin main --allow-unrelated-histories
+
 git push -u origin main
+
 git push -u origin main --force
 
 
