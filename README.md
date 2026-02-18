@@ -2,6 +2,14 @@
 
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.1.4.
 
+node -v
+npm -v
+
+## Install Angular CLI globally:
+
+npm install -g @angular/cli
+
+
 ## Development server
 
 To start a local development server, run:
@@ -16,44 +24,114 @@ Once the server is running, open your browser and navigate to `http://localhost:
 
 Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
 
-```bash
-ng generate component component-name
-```
+## STEP 2: Create Angular Project
+
+ng new university-lms
+
+cd university-lms
 
 For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
 
-```bash
-ng generate --help
-```
+## STEP 3: Create Project Structure (Modules)
+
+ng g module modules/auth --routing
+ng g module modules/admin --routing
+ng g module modules/student --routing
+ng g module modules/teacher --routing
+ng g module shared
 
 ## Building
 
-To build the project run:
+## STEP 4: Create Components
+Auth Components
+ng g c modules/auth/login
+ng g c modules/auth/register
 
-```bash
-ng build
-```
+## Admin Components
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+ng g c modules/admin/dashboard
+ng g c modules/admin/manage-users
+ng g c modules/admin/manage-courses
 
-## Running unit tests
 
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
+## Student Components
+ng g c modules/student/dashboard
+ng g c modules/student/my-courses
+ng g c modules/student/assignments
 
-```bash
-ng test
-```
 
-## Running end-to-end tests
+## Teacher Components
+ng g c modules/teacher/dashboard
+ng g c modules/teacher/create-course
+ng g c modules/teacher/upload-material
 
-For end-to-end (e2e) testing, run:
 
-```bash
-ng e2e
-```
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+## STEP 5: Create Core Services
 
-## Additional Resources
+## Create API service:
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+ng g service core/services/api
+
+## Create auth service:
+
+ng g service core/services/auth
+
+## Create course service:
+
+ng g service core/services/course
+
+
+
+
+## STEP 6: Setup Routing (Main app-routing.module.ts)
+const routes: Routes = [
+  { path: '', redirectTo: 'auth/login', pathMatch: 'full' },
+
+  {
+    path: 'auth',
+    loadChildren: () =>
+      import('./modules/auth/auth.module').then(m => m.AuthModule)
+  },
+  {
+    path: 'admin',
+    loadChildren: () =>
+      import('./modules/admin/admin.module').then(m => m.AdminModule)
+  },
+  {
+    path: 'student',
+    loadChildren: () =>
+      import('./modules/student/student.module').then(m => m.StudentModule)
+  },
+  {
+    path: 'teacher',
+    loadChildren: () =>
+      import('./modules/teacher/teacher.module').then(m => m.TeacherModule)
+  }
+];
+
+
+
+## STEP 7: Add Angular Material (Optional but Recommended)
+
+ng add @angular/material
+
+ng build --configuration production
+
+
+cd university-lms
+
+
+npm install -D tailwindcss postcss autoprefixer
+
+npx tailwindcss init
+
+tailwind.config.js
+
+npm install -D tailwindcss @tailwindcss/postcss postcss autoprefixer
+
+## Create postcss.config.js (Manual)
+
+In project root (university-lms/) create:
+
+postcss.config.js
